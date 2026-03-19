@@ -72,7 +72,7 @@ services:
       # inside the container — no rebuild required. Combined with
       # uvicorn's --reload flag, the server restarts automatically
       # whenever you save a Python file.
-      - ..:/workspace
+      - .:/workspace
 
   # ── Frontend (dev overrides) ─────────────────────────────────────────
   frontend:
@@ -84,7 +84,7 @@ services:
       #
       # Nginx's default document root is /usr/share/nginx/html, so
       # this is where static files must live inside the container.
-      - ../frontend/public:/usr/share/nginx/html
+      - ./frontend/public:/usr/share/nginx/html
 
     # Clear published ports for the same reason as the backend above.
     # The dev container forwards frontend:80 via devcontainer.json.
