@@ -36,6 +36,10 @@ import os
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
+# 1. ADD THIS IMPORT NEAR THE TOP:
+# This pulls the 'router' variable from the file you just created
+from legacy_stats import router as legacy_stats_router
+
 from robot_client import robot, RobotConnectionError
 
 # ── Configuration from environment variables ───────────────────────────────
@@ -108,6 +112,10 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+# 2. ADD THIS LINE ANYWHERE AFTER 'app = FastAPI(...)'
+# This physically attaches the bad code to your live server
+app.include_router(legacy_stats_router)
 
 
 # ── Health check ───────────────────────────────────────────────────────────
